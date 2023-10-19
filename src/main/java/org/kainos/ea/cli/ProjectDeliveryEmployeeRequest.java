@@ -5,15 +5,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.sql.Date;
 
-public class ProjectDeliveryRequest {
+public class ProjectDeliveryEmployeeRequest {
 
     private int projectId;
     private int deliveryEmployeeId;
     private Date startedOnDate;
 
     @JsonCreator
-    public ProjectDeliveryRequest(@JsonProperty("deliveryEmployeeId") int deliveryEmployeeId,
-                                  @JsonProperty("startedOnDate") Date startedOnDate) {
+    public ProjectDeliveryEmployeeRequest(@JsonProperty("deliveryEmployeeId") int deliveryEmployeeId,
+                                          @JsonProperty("startedOnDate") Date startedOnDate) {
         this.deliveryEmployeeId = deliveryEmployeeId;
         this.startedOnDate = startedOnDate;
     }
