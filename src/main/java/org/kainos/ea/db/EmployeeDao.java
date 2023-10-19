@@ -45,7 +45,7 @@ public class EmployeeDao {
                 "USING(employee_id) " +
                 "WHERE employee_id = ?;";
 
-        PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement st = c.prepareStatement(insertStatement);
 
         st.setInt(1, id);
 
