@@ -2,6 +2,7 @@ package org.kainos.ea.api;
 
 import org.kainos.ea.cli.DeliveryEmployee;
 import org.kainos.ea.cli.Employee;
+import org.kainos.ea.cli.ProjectDeliveryRequest;
 import org.kainos.ea.client.GenericActionFailedException;
 import org.kainos.ea.client.GenericDoesNotExistException;
 import org.kainos.ea.db.EmployeeDao;
@@ -54,4 +55,9 @@ public class EmployeeService {
             }
         }
 
+    public int addDeliveryEmployeeToProject(int id, ProjectDeliveryRequest projectDelivery) {
+
+        return 1;
+
+    }
 }

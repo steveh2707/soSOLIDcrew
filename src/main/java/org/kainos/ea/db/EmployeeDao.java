@@ -2,6 +2,7 @@ package org.kainos.ea.db;
 
 import org.kainos.ea.cli.DeliveryEmployee;
 import org.kainos.ea.cli.Employee;
+import org.kainos.ea.cli.ProjectDeliveryRequest;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -91,5 +92,31 @@ public class EmployeeDao {
 
         }
         return deliveryEmployeeList;
+    }
+
+    public int addDeliveryEmployeeToProject(int id, ProjectDeliveryRequest projectDelivery) throws SQLException {
+
+        Connection c = DatabaseConnector.getConnection();
+
+        String insertStatement = "INSERT INTO project_delivery_employee " +
+                "(project_id, delivery_employee_id, started_on_date) " +
+                "VALUES (?, ?, ?);";
+
+        PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
+
+        st.setInt(1, id);
+        st.setInt(2, projectDelivery.getDeliveryEmployeeId());
+        st.setDate(3, projectDelivery.getStartedOnDate());
+
+        st.executeUpdate();
+
+        ResultSet rs = st.getGeneratedKeys();
+
+        if(rs.next()){
+            return rs.getInt(1);
+        }
+
+        return -1;
+
     }
 }
