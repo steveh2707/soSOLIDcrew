@@ -1,5 +1,6 @@
 package org.kainos.ea.db;
 
+import org.kainos.ea.cli.DeliveryEmployee;
 import org.kainos.ea.cli.Employee;
 
 import java.sql.Connection;
@@ -21,7 +22,7 @@ public class EmployeeDao {
         List<Employee> employeeList = new ArrayList<>();
 
         while (rs.next()) {
-            Employee employee = new Employee(
+            Employee employee = new DeliveryEmployee(
                     rs.getInt("employee_id"),
                     rs.getString("first_name"),
                     rs.getString("last_name"),
