@@ -75,4 +75,21 @@ public class EmployeeService {
 
 
 
+    public void deleteDeliveryEmployee(int id) throws GenericDoesNotExistException, GenericActionFailedException{
+        try{
+            DeliveryEmployee deliveryEmployeeToDelete = employeeDao.getDeliveryEmployeeById(id);
+
+            if (deliveryEmployeeToDelete == null) {
+                throw new GenericDoesNotExistException("delivery employee does not exist");
+            }
+
+            employeeDao.deleteDeliveryEmployee(id);
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+
+            throw new GenericActionFailedException("failed to delete delivery employee");
+        }
+    }
+
+
 }
