@@ -41,9 +41,12 @@ public class EmployeeController {
                     .status(Response.Status.OK)
                     .entity(employeeService.getDeliveryEmployeeById(id))
                     .build();
-        } catch (GenericDoesNotExistException | GenericActionFailedException e) {
+        } catch (GenericActionFailedException e) {
             System.err.println(e.getMessage());
             return Response.serverError().build();
+        } catch (GenericDoesNotExistException e){
+
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
         }
     }
 

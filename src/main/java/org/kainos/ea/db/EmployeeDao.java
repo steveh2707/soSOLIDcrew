@@ -3,10 +3,7 @@ package org.kainos.ea.db;
 import org.kainos.ea.cli.DeliveryEmployee;
 import org.kainos.ea.cli.Employee;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,13 +38,18 @@ public class EmployeeDao {
         Connection c = DatabaseConnector.getConnection();
         assert c != null;
 
-        Statement st = c.createStatement();
-        ResultSet rs = st.executeQuery("SELECT employee_id, first_name, " +
-                        "last_name, salary, bank_account_number, national_insurance_number " +
-                        "FROM delivery_employee " +
-                        "INNER JOIN employee " +
-                        "USING(employee_id) " +
-                        "WHERE employee_id ="+id);
+        String insertStatement = "SELECT employee_id, first_name, " +
+                "last_name, salary, bank_account_number, national_insurance_number " +
+                "FROM delivery_employee " +
+                "INNER JOIN employee " +
+                "USING(employee_id) " +
+                "WHERE employee_id = ?;";
+
+        PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
+
+        st.setInt(1, id);
+
+        ResultSet rs = st.executeQuery();
 
         while (rs.next()) {
             return new DeliveryEmployee(
