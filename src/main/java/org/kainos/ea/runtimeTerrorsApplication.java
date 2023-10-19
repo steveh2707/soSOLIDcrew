@@ -6,6 +6,7 @@ import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import org.kainos.ea.resources.EmployeeController;
+import org.kainos.ea.resources.ProjectController;
 
 public class runtimeTerrorsApplication extends Application<runtimeTerrorsConfiguration> {
 
@@ -34,6 +35,7 @@ public class runtimeTerrorsApplication extends Application<runtimeTerrorsConfigu
                     final Environment environment) {
         // TODO: implement application
         environment.jersey().register(new EmployeeController());
+        environment.jersey().register(new ProjectController());
     }
 
 }
