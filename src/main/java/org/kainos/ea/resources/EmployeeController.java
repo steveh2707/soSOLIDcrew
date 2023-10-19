@@ -3,7 +3,6 @@ package org.kainos.ea.resources;
 import io.swagger.annotations.Api;
 import org.kainos.ea.api.EmployeeService;
 import org.kainos.ea.cli.DeliveryEmployeeRequest;
-import org.kainos.ea.cli.ProjectDeliveryEmployeeRequest;
 import org.kainos.ea.client.GenericActionFailedException;
 import org.kainos.ea.client.GenericValidationException;
 import org.kainos.ea.client.GenericDoesNotExistException;
@@ -90,22 +89,5 @@ public class EmployeeController {
         }
     }
 
-    @POST
-    @Path("/projects/{id}/delivery")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response addDeliveryEmployeeToProject(@PathParam("id") int id, ProjectDeliveryEmployeeRequest projectDelivery){
-        try {
-            return Response
-                    .status(Response.Status.OK)
-                    .entity(employeeService.addDeliveryEmployeeToProject(id, projectDelivery))
-                    .build();
-        } catch (GenericActionFailedException e) {
-            System.err.println(e.getMessage());
-            return Response.serverError().build();
-        } catch (GenericDoesNotExistException e){
-
-            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
-        }
-    }
 
 }
