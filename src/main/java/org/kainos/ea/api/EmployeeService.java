@@ -65,7 +65,6 @@ public class EmployeeService {
     public List<DeliveryEmployee> getAllDeliveryEmployees() throws  GenericActionFailedException {
 
         try{
-
             return employeeDao.getAllDeliveryEmployees();
         } catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -74,25 +73,6 @@ public class EmployeeService {
         }
     }
 
-//    public void updateProjectDeliveryEmployee(ProjectDeliveryEmployee projectDeliveryEmployee) throws InvalidOrderException, GenericFailedException, FailedToCreateOrderException {
-//        try {
-////            String validationMessage = orderValidator.isValidOrder(order);
-////            if (validationMessage != null) {
-////                throw new InvalidOrderException(validationMessage);
-////            }
-//
-//            ProjectDeliveryEmployee projectDeliveryEmployeeToBeUpdated = orderDao.getOrderById(id);
-//
-//            if (orderToBeUpdated == null) {
-//                throw new GenericFailedException("Order does not exist");
-//            }
-//
-//            orderDao.updateOrder(id, order);
-//
-//        } catch (SQLException e) {
-//            System.err.println(e.getMessage());
-//            throw new FailedToCreateOrderException();
-//        }
-//    }
+
 
 }
