@@ -36,4 +36,30 @@ public class EmployeeDao {
 
         return employeeList;
     }
+
+    public List<DeliveryEmployee> getAllDeliveryEmployees() throws SQLException {
+        Connection c = DatabaseConnector.getConnection();
+        assert c != null;
+
+        Statement st = c.createStatement();
+        ResultSet rs = st.executeQuery("Select employee_id, first_name, last_name, salary, bank_account_number, national_insurance_number " +
+                "from delivery_employee LEFT JOIN employee USING (employee_id)");
+
+        List<DeliveryEmployee> deliveryEmployeeList = new ArrayList<>();
+
+        while (rs.next()) {
+            DeliveryEmployee deliveryEmployee = new DeliveryEmployee(
+                    rs.getInt("employee_id"),
+                    rs.getString("first_name"),
+                    rs.getString("last_name"),
+                    rs.getDouble("salary"),
+                    rs.getString("bank_account_number"),
+                    rs.getString("national_insurance_number")
+            );
+
+            deliveryEmployeeList.add(deliveryEmployee);
+
+        }
+        return deliveryEmployeeList;
+    }
 }

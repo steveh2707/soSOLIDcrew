@@ -1,5 +1,6 @@
 package org.kainos.ea.api;
 
+import org.kainos.ea.cli.DeliveryEmployee;
 import org.kainos.ea.cli.Employee;
 import org.kainos.ea.client.GenericActionFailedException;
 import org.kainos.ea.db.EmployeeDao;
@@ -19,7 +20,20 @@ public class EmployeeService {
             return employeeDao.getAllEmployees();
         } catch (SQLException e) {
             System.err.println(e.getMessage());
-            throw new GenericActionFailedException("books");
+            throw new GenericActionFailedException("get all employees");
         }
     }
+
+    public List<DeliveryEmployee> getAllDeliveryEmployees() throws  GenericActionFailedException {
+
+        try{
+
+            return employeeDao.getAllDeliveryEmployees();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+           throw new GenericActionFailedException("get all delivery employees");
+
+            }
+        }
+
 }
