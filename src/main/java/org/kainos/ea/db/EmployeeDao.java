@@ -131,4 +131,20 @@ public class EmployeeDao {
 
         return -1;
     }
+
+    public void deleteDeliveryEmployee(int id) throws SQLException {
+        Connection c = DatabaseConnector.getConnection();
+        assert c != null;
+
+        String updateStatement = "DELETE delivery_employee, employee " +
+                "FROM delivery_employee " +
+                "LEFT JOIN employee USING (employee_id) " +
+                "WHERE employee_id = ?";
+
+        PreparedStatement st = c.prepareStatement(updateStatement);
+
+        st.setInt(1, id);
+
+        st.executeUpdate();
+    }
 }
