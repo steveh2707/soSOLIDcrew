@@ -3,6 +3,7 @@ package org.kainos.ea.api;
 import org.kainos.ea.cli.DeliveryEmployeeRequest;
 import org.kainos.ea.cli.DeliveryEmployee;
 import org.kainos.ea.cli.Employee;
+import org.kainos.ea.cli.ProjectDeliveryEmployee;
 import org.kainos.ea.client.GenericActionFailedException;
 import org.kainos.ea.client.GenericValidationException;
 import org.kainos.ea.core.DeliveryEmployeeValidator;
@@ -72,5 +73,24 @@ public class EmployeeService {
 
             }
         }
+
+
+
+    public void deleteDeliveryEmployee(int id) throws GenericDoesNotExistException, GenericActionFailedException{
+        try{
+            DeliveryEmployee deliveryEmployeeToDelete = employeeDao.getDeliveryEmployeeById(id);
+
+            if (deliveryEmployeeToDelete == null) {
+                throw new GenericDoesNotExistException("delivery employee does not exist");
+            }
+
+            employeeDao.deleteDeliveryEmployee(id);
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+
+            throw new GenericActionFailedException("failed to delete delivery employee");
+        }
+    }
+
 
 }
