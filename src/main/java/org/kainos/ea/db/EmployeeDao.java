@@ -139,22 +139,23 @@ public class EmployeeDao {
 
         String insertStatement = "INSERT INTO project_delivery_employee " +
                 "(project_id, delivery_employee_id, started_on_date) " +
-                "VALUES (?, ?, ?);";
+                "VALUES ";
 
-        PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
 
-        st.setInt(1, id);
-        st.setInt(2, projectDelivery.getDeliveryEmployeeId());
-        st.setDate(3, projectDelivery.getStartedOnDate());
+        for (int deliveryEmployeeId : projectDelivery.getDeliveryEmployeeIds()) {
 
-        st.executeUpdate();
+            insertStatement += "(?, ?, ?)";
 
-        ResultSet rs = st.getGeneratedKeys();
+            PreparedStatement st = c.prepareStatement(insertStatement);
 
-        if(rs.next()){
-            return rs.getInt(1);
+            st.setInt(1, id);
+            st.setInt(2, deliveryEmployeeId);
+            st.setDate(3, projectDelivery.getStartedOnDate());
+
+            st.executeUpdate();
+
+            insertStatement += ", ";
         }
-
         return -1;
 
     }

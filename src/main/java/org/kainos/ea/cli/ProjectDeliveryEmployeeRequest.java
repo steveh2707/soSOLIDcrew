@@ -8,13 +8,13 @@ import java.sql.Date;
 public class ProjectDeliveryEmployeeRequest {
 
     private int projectId;
-    private int deliveryEmployeeId;
+    private int[] deliveryEmployeeIds;
     private Date startedOnDate;
 
     @JsonCreator
-    public ProjectDeliveryEmployeeRequest(@JsonProperty("deliveryEmployeeId") int deliveryEmployeeId,
+    public ProjectDeliveryEmployeeRequest(@JsonProperty("deliveryEmployeeIds") int[] deliveryEmployeeIds,
                                           @JsonProperty("startedOnDate") Date startedOnDate) {
-        this.deliveryEmployeeId = deliveryEmployeeId;
+        this.deliveryEmployeeIds = deliveryEmployeeIds;
         this.startedOnDate = startedOnDate;
     }
 
@@ -26,12 +26,12 @@ public class ProjectDeliveryEmployeeRequest {
         this.projectId = projectId;
     }
 
-    public int getDeliveryEmployeeId() {
-        return deliveryEmployeeId;
+    public int[] getDeliveryEmployeeIds() {
+        return deliveryEmployeeIds;
     }
 
-    public void setDeliveryEmployeeId(int deliveryEmployeeId) {
-        this.deliveryEmployeeId = deliveryEmployeeId;
+    public void setDeliveryEmployeeIds(int[] deliveryEmployeeIds) {
+        this.deliveryEmployeeIds = deliveryEmployeeIds;
     }
 
     public Date getStartedOnDate() {
