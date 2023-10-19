@@ -21,7 +21,7 @@ public class EmployeeService {
             return employeeDao.getAllEmployees();
         } catch (SQLException e) {
             System.err.println(e.getMessage());
-            throw new GenericActionFailedException("books");
+            throw new GenericActionFailedException("get all employees");
         }
     }
 
@@ -40,5 +40,18 @@ public class EmployeeService {
             throw new GenericActionFailedException("Get Delivery Employee By ID");
         }
     }
+
+
+    public List<DeliveryEmployee> getAllDeliveryEmployees() throws  GenericActionFailedException {
+
+        try{
+
+            return employeeDao.getAllDeliveryEmployees();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+           throw new GenericActionFailedException("get all delivery employees");
+
+            }
+        }
 
 }

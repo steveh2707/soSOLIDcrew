@@ -50,4 +50,20 @@ public class EmployeeController {
         }
     }
 
+
+    @GET
+    @Path("/employees/delivery")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllDeliveryEmployees(){
+        try {
+            return Response
+                    .status(Response.Status.OK)
+                    .entity(employeeService.getAllDeliveryEmployees())
+                    .build();
+        } catch (GenericActionFailedException e) {
+            System.err.println(e.getMessage());
+            return Response.serverError().build();
+        }
+    }
+
 }
