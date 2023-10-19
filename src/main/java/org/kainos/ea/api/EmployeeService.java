@@ -3,7 +3,6 @@ package org.kainos.ea.api;
 import org.kainos.ea.cli.DeliveryEmployeeRequest;
 import org.kainos.ea.cli.DeliveryEmployee;
 import org.kainos.ea.cli.Employee;
-import org.kainos.ea.cli.ProjectDeliveryEmployeeRequest;
 import org.kainos.ea.client.GenericActionFailedException;
 import org.kainos.ea.client.GenericValidationException;
 import org.kainos.ea.core.DeliveryEmployeeValidator;
@@ -61,6 +60,7 @@ public class EmployeeService {
         }
     }
 
+
     public List<DeliveryEmployee> getAllDeliveryEmployees() throws  GenericActionFailedException {
 
         try{
@@ -73,9 +73,4 @@ public class EmployeeService {
             }
         }
 
-    public int addDeliveryEmployeeToProject(int id, ProjectDeliveryEmployeeRequest projectDelivery) {
-
-        return 1;
-
-    }
 }
