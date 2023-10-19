@@ -3,6 +3,7 @@ package org.kainos.ea.db;
 import org.kainos.ea.cli.DeliveryEmployee;
 import org.kainos.ea.cli.DeliveryEmployeeRequest;
 import org.kainos.ea.cli.Employee;
+import org.kainos.ea.cli.ProjectDeliveryEmployee;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -89,7 +90,6 @@ public class EmployeeDao {
             );
 
             deliveryEmployeeList.add(deliveryEmployee);
-
         }
         return deliveryEmployeeList;
     }
@@ -147,4 +147,6 @@ public class EmployeeDao {
 
         st.executeUpdate();
     }
+
+
 }
