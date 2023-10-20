@@ -65,13 +65,14 @@ public class EmployeeService {
     public List<DeliveryEmployee> getAllDeliveryEmployees() throws  GenericActionFailedException {
 
         try{
+
             return employeeDao.getAllDeliveryEmployees();
         } catch (SQLException e) {
             System.err.println(e.getMessage());
            throw new GenericActionFailedException("get all delivery employees");
 
+            }
         }
-    }
 
 
 

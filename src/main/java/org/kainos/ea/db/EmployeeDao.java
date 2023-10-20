@@ -90,6 +90,7 @@ public class EmployeeDao {
             );
 
             deliveryEmployeeList.add(deliveryEmployee);
+
         }
         return deliveryEmployeeList;
     }
@@ -132,6 +133,21 @@ public class EmployeeDao {
         return -1;
     }
 
+    public void updateProjectDeliveryEmployee(ProjectDeliveryEmployee projectDeliveryEmployee) throws SQLException {
+        Connection c = DatabaseConnector.getConnection();
+
+        String updateStatement = "UPDATE project_delivery_employee SET ended_on_date = ? WHERE project_id = ? AND delivery_employee_id = ? AND started_on_date = ?;";
+        PreparedStatement st = c.prepareStatement(updateStatement);
+
+        st.setDate(1, projectDeliveryEmployee.getEndedOnDate());
+        st.setInt(2, projectDeliveryEmployee.getProjectId());
+        st.setInt(3, projectDeliveryEmployee.getDeliveryEmployeeId());
+        st.setDate(4, projectDeliveryEmployee.getStartedOnDate());
+
+
+        st.executeUpdate();
+    }
+
     public void deleteDeliveryEmployee(int id) throws SQLException {
         Connection c = DatabaseConnector.getConnection();
         assert c != null;
@@ -147,6 +163,5 @@ public class EmployeeDao {
 
         st.executeUpdate();
     }
-
 
 }
