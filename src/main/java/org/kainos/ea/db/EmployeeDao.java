@@ -131,19 +131,21 @@ public class EmployeeDao {
         return -1;
     }
 
-    public void updateDeliveryEmployee(int id, DeliveryEmployeeRequest employee) throws SQLException {
+
+  
+    public void updateDeliveryEmployee(int id, DeliveryEmployeeUpdateRequest employee) throws SQLException {
         Connection c = DatabaseConnector.getConnection();
 
-        String updateStatement = "UPDATE employee SET first_name = ?, last_name = ?, salary = ?, bank_account_number = ?, national_insurance_number = ? WHERE employee_id = ?";
+        String updateStatement = "UPDATE employee SET first_name = ?, last_name = ?, salary = ?, bank_account_number = ? WHERE employee_id = ?";
 
+      
         PreparedStatement st = c.prepareStatement(updateStatement);
 
         st.setString(1, employee.getFirstName());
         st.setString(2, employee.getLastName());
         st.setDouble(3, employee.getSalary());
         st.setString(4,employee.getBankAccountNumber());
-        st.setString(5,employee.getNationalInsuranceNumber());
-        st.setInt(6,id);
+        st.setInt(5,id);
 
         st.executeUpdate();
     }

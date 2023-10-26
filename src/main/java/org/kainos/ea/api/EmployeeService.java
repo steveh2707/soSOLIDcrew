@@ -3,7 +3,7 @@ package org.kainos.ea.api;
 import org.kainos.ea.cli.*;
 import org.kainos.ea.client.GenericActionFailedException;
 import org.kainos.ea.client.GenericValidationException;
-import org.kainos.ea.core.DeliveryEmployeeValidator;
+import org.kainos.ea.core.EmployeeValidator;
 import org.kainos.ea.client.GenericDoesNotExistException;
 import org.kainos.ea.db.EmployeeDao;
 
@@ -13,7 +13,7 @@ import java.util.List;
 public class EmployeeService {
 
     private final EmployeeDao employeeDao = new EmployeeDao();
-    private final DeliveryEmployeeValidator deliveryEmployeeValidator = new DeliveryEmployeeValidator();
+    private final EmployeeValidator deliveryEmployeeValidator = new EmployeeValidator();
 
     public List<Employee> getAllEmployees() throws GenericActionFailedException {
 
@@ -72,9 +72,10 @@ public class EmployeeService {
     }
 
 
-    public void updateEmployee(int id, DeliveryEmployeeRequest employee) throws GenericDoesNotExistException, GenericValidationException, GenericActionFailedException {
+
+    public void updateEmployee(int id, DeliveryEmployeeUpdateRequest employee) throws GenericDoesNotExistException, GenericValidationException, GenericActionFailedException {
         try {
-            deliveryEmployeeValidator.isValidDeliveryEmployee(employee);
+            deliveryEmployeeValidator.isValidDeliveryEmployeeUpdateRequest(employee);
 
             Employee employeeToUpdate = employeeDao.getDeliveryEmployeeById(id);
 
