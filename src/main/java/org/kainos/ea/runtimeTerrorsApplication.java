@@ -5,6 +5,7 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
+import org.kainos.ea.resources.AuthController;
 import org.kainos.ea.resources.EmployeeController;
 import org.kainos.ea.resources.ProjectController;
 
@@ -36,6 +37,7 @@ public class runtimeTerrorsApplication extends Application<runtimeTerrorsConfigu
         // TODO: implement application
         environment.jersey().register(new EmployeeController());
         environment.jersey().register(new ProjectController());
+        environment.jersey().register(new AuthController());
     }
 
 }
