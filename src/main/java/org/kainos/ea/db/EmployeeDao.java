@@ -1,9 +1,7 @@
 package org.kainos.ea.db;
 
-import org.kainos.ea.cli.DeliveryEmployee;
-import org.kainos.ea.cli.DeliveryEmployeeRequest;
-import org.kainos.ea.cli.Employee;
-import org.kainos.ea.cli.ProjectDeliveryEmployee;
+import org.kainos.ea.cli.*;
+import org.kainos.ea.client.GenericDoesNotExistException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -132,6 +130,23 @@ public class EmployeeDao {
 
         return -1;
     }
+
+    public void updateDeliveryEmployee(int id, DeliveryEmployeeUpdateRequest employee) throws SQLException {
+        Connection c = DatabaseConnector.getConnection();
+
+        String updateStatement = "UPDATE employee SET first_name = ?, last_name = ?, salary = ?, bank_account_number = ? WHERE employee_id = ?";
+
+        PreparedStatement st = c.prepareStatement(updateStatement);
+
+        st.setString(1, employee.getFirstName());
+        st.setString(2, employee.getLastName());
+        st.setDouble(3, employee.getSalary());
+        st.setString(4,employee.getBankAccountNumber());
+        st.setInt(5,id);
+
+        st.executeUpdate();
+    }
+
 
     public void updateProjectDeliveryEmployee(ProjectDeliveryEmployee projectDeliveryEmployee) throws SQLException {
         Connection c = DatabaseConnector.getConnection();

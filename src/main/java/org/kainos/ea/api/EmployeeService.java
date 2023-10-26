@@ -1,12 +1,9 @@
 package org.kainos.ea.api;
 
-import org.kainos.ea.cli.DeliveryEmployeeRequest;
-import org.kainos.ea.cli.DeliveryEmployee;
-import org.kainos.ea.cli.Employee;
-import org.kainos.ea.cli.ProjectDeliveryEmployee;
+import org.kainos.ea.cli.*;
 import org.kainos.ea.client.GenericActionFailedException;
 import org.kainos.ea.client.GenericValidationException;
-import org.kainos.ea.core.DeliveryEmployeeValidator;
+import org.kainos.ea.core.EmployeeValidator;
 import org.kainos.ea.client.GenericDoesNotExistException;
 import org.kainos.ea.db.EmployeeDao;
 
@@ -16,7 +13,7 @@ import java.util.List;
 public class EmployeeService {
 
     private final EmployeeDao employeeDao = new EmployeeDao();
-    private final DeliveryEmployeeValidator deliveryEmployeeValidator = new DeliveryEmployeeValidator();
+    private final EmployeeValidator deliveryEmployeeValidator = new EmployeeValidator();
 
     public List<Employee> getAllEmployees() throws GenericActionFailedException {
 
@@ -50,7 +47,7 @@ public class EmployeeService {
         try {
             DeliveryEmployee deliveryEmployee = employeeDao.getDeliveryEmployeeById(id);
 
-            if (deliveryEmployee==null){
+            if (deliveryEmployee == null) {
                 throw new GenericDoesNotExistException("Delivery Employee does not exist");
             }
 
@@ -62,22 +59,40 @@ public class EmployeeService {
     }
 
 
-    public List<DeliveryEmployee> getAllDeliveryEmployees() throws  GenericActionFailedException {
+    public List<DeliveryEmployee> getAllDeliveryEmployees() throws GenericActionFailedException {
 
-        try{
+        try {
 
             return employeeDao.getAllDeliveryEmployees();
         } catch (SQLException e) {
             System.err.println(e.getMessage());
-           throw new GenericActionFailedException("get all delivery employees");
+            throw new GenericActionFailedException("get all delivery employees");
 
-            }
         }
+    }
 
 
+    public void updateEmployee(int id, DeliveryEmployeeUpdateRequest employee) throws GenericDoesNotExistException, GenericValidationException, GenericActionFailedException {
+        try {
+            deliveryEmployeeValidator.isValidDeliveryEmployeeUpdateRequest(employee);
 
-    public void deleteDeliveryEmployee(int id) throws GenericDoesNotExistException, GenericActionFailedException{
-        try{
+            Employee employeeToUpdate = employeeDao.getDeliveryEmployeeById(id);
+
+            if (employeeToUpdate == null) {
+                throw new GenericDoesNotExistException("Delivery employee does not exist");
+            }
+
+            employeeDao.updateDeliveryEmployee(id, employee);
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            throw new GenericActionFailedException("Failed to update delivery employee");
+        }
+    }
+
+
+    public void deleteDeliveryEmployee(int id) throws GenericDoesNotExistException, GenericActionFailedException {
+        try {
             DeliveryEmployee deliveryEmployeeToDelete = employeeDao.getDeliveryEmployeeById(id);
 
             if (deliveryEmployeeToDelete == null) {
