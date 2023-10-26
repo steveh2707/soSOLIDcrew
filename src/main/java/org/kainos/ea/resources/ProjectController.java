@@ -17,7 +17,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Api("Runtime Terrors API")
+@Api("So SOLID Crew API")
 @Path("/api")
 public class ProjectController {
     private final ProjectService projectService = new ProjectService();

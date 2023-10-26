@@ -11,7 +11,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Api("Runtime Terrors API")
+@Api("So SOLID Crew API")
 @Path("/api")
 public class EmployeeController {
     private final EmployeeService employeeService = new EmployeeService();
@@ -91,18 +91,38 @@ public class EmployeeController {
     public Response deleteDeliveryEmployee(@PathParam("id") int id) {
 
         try {
-
             employeeService.deleteDeliveryEmployee(id);
 
             return Response.ok().build();
 
         } catch (GenericActionFailedException e) {
             System.err.println(e.getMessage());
-
             return Response.serverError().build();
         } catch (GenericDoesNotExistException e) {
-
             return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+        }
+    }
+
+
+    @PUT
+    @Path("/employees/delivery/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response createEmployee(@PathParam("id") int id, DeliveryEmployeeRequest employee) {
+        try{
+            employeeService.updateEmployee(id, employee);
+
+            return Response.ok().build();
+        } catch (GenericActionFailedException e) {
+            System.err.println(e.getMessage());
+            return Response.serverError().build();
+
+        } catch (GenericValidationException | GenericDoesNotExistException e) {
+            System.err.println(e.getMessage());
+            return Response
+                    .status(Response.Status.BAD_REQUEST)
+                    .entity(e.getMessage())
+                    .build();
+
         }
     }
 }
