@@ -3,6 +3,7 @@ package org.kainos.ea.resources;
 import io.swagger.annotations.Api;
 import org.kainos.ea.api.EmployeeService;
 import org.kainos.ea.cli.DeliveryEmployeeRequest;
+import org.kainos.ea.cli.DeliveryEmployeeUpdateRequest;
 import org.kainos.ea.client.GenericActionFailedException;
 import org.kainos.ea.client.GenericValidationException;
 import org.kainos.ea.client.GenericDoesNotExistException;
@@ -107,7 +108,7 @@ public class EmployeeController {
     @PUT
     @Path("/employees/delivery/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createEmployee(@PathParam("id") int id, DeliveryEmployeeRequest employee) {
+    public Response createEmployee(@PathParam("id") int id, DeliveryEmployeeUpdateRequest employee) {
         try{
             employeeService.updateEmployee(id, employee);
 
@@ -116,13 +117,17 @@ public class EmployeeController {
             System.err.println(e.getMessage());
             return Response.serverError().build();
 
-        } catch (GenericValidationException | GenericDoesNotExistException e) {
+        } catch (GenericValidationException e) {
             System.err.println(e.getMessage());
             return Response
                     .status(Response.Status.BAD_REQUEST)
                     .entity(e.getMessage())
                     .build();
-
+        } catch (GenericDoesNotExistException e) {
+            return Response
+                    .status(Response.Status.NOT_FOUND)
+                    .entity(e.getMessage())
+                    .build();
         }
     }
 }

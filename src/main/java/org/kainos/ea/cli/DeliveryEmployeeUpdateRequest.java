@@ -1,18 +1,25 @@
 package org.kainos.ea.cli;
 
-public class DeliveryEmployeeRequest {
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class DeliveryEmployeeUpdateRequest {
+
     private String firstName;
     private String lastName;
     private double salary;
     private String bankAccountNumber;
-    private String nationalInsuranceNumber;
 
-    public DeliveryEmployeeRequest(String firstName, String lastName, double salary, String bankAccountNumber, String nationalInsuranceNumber) {
+    @JsonCreator
+    public DeliveryEmployeeUpdateRequest(
+            @JsonProperty("firstName") String firstName,
+            @JsonProperty("lastName") String lastName,
+            @JsonProperty("salary") double salary,
+            @JsonProperty("bankAccountNumber") String bankAccountNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.salary = salary;
         this.bankAccountNumber = bankAccountNumber;
-        this.nationalInsuranceNumber = nationalInsuranceNumber;
     }
 
     public String getFirstName() {
@@ -47,11 +54,4 @@ public class DeliveryEmployeeRequest {
         this.bankAccountNumber = bankAccountNumber;
     }
 
-    public String getNationalInsuranceNumber() {
-        return nationalInsuranceNumber;
-    }
-
-    public void setNationalInsuranceNumber(String nationalInsuranceNumber) {
-        this.nationalInsuranceNumber = nationalInsuranceNumber;
-    }
 }
